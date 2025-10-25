@@ -21,7 +21,13 @@ public class Server {
                     while (true) {
                         try {
                             var line = reader.readLine();
-                            writer.println(line.chars().map(c -> c + 1).toString());
+                            writer.println(line.chars().map(c -> c + 1)
+                                    .collect(
+                                            StringBuilder::new,
+                                            (sb, i) -> sb.append((char) i),
+                                            StringBuilder::append
+                                    )
+                                    .toString());
                             writer.flush();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
