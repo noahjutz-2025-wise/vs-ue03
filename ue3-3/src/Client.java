@@ -1,6 +1,9 @@
-void main() {
+void main(String[] args) {
+  final var port = Args.parsePort(args);
+  final var host = Args.parseAddr(args);
+
   final var scanner = new Scanner(System.in);
-  try (var socket = new Socket(InetAddress.getLocalHost(), 6868)) {
+  try (var socket = new Socket(host, port)) {
     final var writer = new PrintWriter(socket.getOutputStream());
     final var reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     new Thread(() -> {
