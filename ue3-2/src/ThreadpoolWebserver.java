@@ -16,11 +16,13 @@ void main() {
             if (request != null && request.equals("GET / HTTP/1.1")) {
               IO.println("Request received!");
               writer.write(
-                "HTTP/1.1 200 OK\n" +
-                  "Content-Type: text/html\n" +
-                  "Hello world!"
+                "HTTP/1.1 200 OK\r\n" +
+                  "Content-Type: text/html\r\n" +
+                  "\r\n" +
+                  "Hello world!\r\n"
               );
               writer.flush();
+              socket.close();
             }
           } catch (IOException e) {
             throw new RuntimeException(e);
