@@ -14,11 +14,17 @@ void main(String[] args) throws UnknownHostException {
             var reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             var writer = new PrintWriter(socket.getOutputStream());
 
-            writer.println("Hallo"); // oder print(("Hallo\n");
-            writer.flush();
-
-            String antwort = reader.readLine();
-            System.out.println("Antwort der Gegenseite: " + antwort);
+            new Thread(() -> {
+                while (true) {
+                    try {
+                        var line = reader.readLine();
+                        writer.println(line.chars().map(c -> c + 1).toString());
+                        writer.flush();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }).start();
         }
     } catch (IOException e) {
         throw new RuntimeException(e);
