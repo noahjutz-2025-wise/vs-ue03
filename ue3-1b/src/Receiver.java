@@ -7,7 +7,11 @@ void main() {
             try {
                 final var packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
-                IO.println(new String(Arrays.copyOfRange(buffer, 0, packet.getLength()), StandardCharsets.UTF_8));
+                var msg = new String(Arrays.copyOfRange(buffer, 0, packet.getLength()), StandardCharsets.UTF_8);
+                IO.println(msg);
+                if (msg.equals("Ende")) {
+                    break;
+                }
                 Arrays.fill(buffer, (byte) 0);
             } catch (IOException e) {
                 throw new RuntimeException(e);
