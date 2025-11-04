@@ -11,7 +11,8 @@ void main(String[] args) {
             new Thread(() -> {
                 while (true) {
                     try {
-                        var line = reader.readLine();
+                        final var line = reader.readLine();
+                        if (line == null) break;
                         writer.println(line.chars().map(c -> c + 1)
                                 .collect(
                                         StringBuilder::new,
