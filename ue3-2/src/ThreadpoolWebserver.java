@@ -12,7 +12,7 @@ void main() {
       executor.execute(() -> {
         while (true) {
           try {
-            var request = reader.readLine();
+            final var request = reader.readLine();
             if (request != null && request.equals("GET / HTTP/1.1")) {
               IO.println("Request received!");
               writer.write(
