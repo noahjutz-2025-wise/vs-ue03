@@ -1,1 +1,0 @@
-public record Message(String from, String to, String body) {}
